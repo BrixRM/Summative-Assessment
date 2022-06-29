@@ -1,27 +1,205 @@
 ---
-title: "Untitled"
-author: Brix Mayabason, Andrew Go-Alcantara, Justin Ricafort, Carlo Velonza, Louis
-  De Los Santos
-date: '2022-06-28'
-output: html_document
+Title: "Summative Assessment"
+Author: "Justin Ricafort, Andrew Go Alcantara, Carlo Velonza, Brix Mayabason, Louis De los Santos"
+Date: '2022-06-29'
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+```{css, echo=FALSE}
+p {
+  font-size: 16px;
+  font-family: Montserrat;
+  text-align: justify;
+}
 
-MONTY HALL PROBLEM
+ref{
+  font-size: 12px;
+  font-family: Montserrat;
+}
 
-```{r cars}
-summary(cars)
 ```
 
-## Including Plots
+![](C:\Users\Brix\Desktop\ENGG 21\MARKDOWN PICS\monty.png)
 
-You can also embed plots, for example:
+<p align=center> <font size = "6">  <font color="ffb045">
+<center>
+**PROBLEM DESCRIPTION**
+</font></font></p>
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+In the setting of a game show, the game master hides two goats and a brand new car behind three closed doors. The game master asks you to choose a door and the contents behind it will be yours. Obviously, to make the most of your participation in the game, you would want to choose the door with the car. (The logistics of keeping a goat would be better discussed in another document.) After choosing a door to open, the game master asks you to wait and before he opens the chosen door, he opens another door revealing a goat. The question now is, should you switch doors?
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+<p align=center> <font size = "6">  <font color="ffb045">
+<center>
+**SOLUTION**
+</font></font></p>
+
+<p>
+
+Suppose that you are given the option of choosing one of three doors. One of the doors have grand prize of value, while the rest have prizes on lesser value. Once you pick one door, the host removes one door which is sure to have one if the two lesser prizes. Will you take the option to switch, or stick with your original choice.
+
+Let A, B, & C be the doors from which to choose from. A “lose” indicates that the contestant didn’t win the grand prize, while a “win” indicates that the contestant won the grand prize.
+
+<center>
+<img src="C:\Users\Brix\Desktop\ENGG 21\MARKDOWN PICS\table.png" width="600">
+</center>
+</br>
+• Looking at the odds, the first choice is a one out of three chance of getting the grand prize.
+
+• The second choice is sort of different, since if you switch you will still keep the one out of three chance to win the grand prize.
+
+• If you were to switch, the chances are changed to two in three, since the door that the host opens will always be a door with the lesser prize.
+
+<p align=center> <font size = "5">
+<center>
+**Bayes' Theorem**
+</font></p>
+
+Calculating the probability in the monty hall problem using Bayes theorem which shows the probability of event A occurring given that event B occurred. This theorem is given by the formula:
+<br/>\newline<br/>\newline
+$$
+P(A|B) = \frac{P(B|A)*P(A)}{P(B)}
+$$
+<br/>\newline
+Using Bayes’ Theorem, we can calculate the probability that the chosen door is correct given that another door was opened. 
+
+**P(A|B)** = Probability that door A is correct if door B is opened; posterior<br/>\newline
+**P(B|A)** = Probability that door B is opened given door A is correct; likelihood<br/>\newline
+**P(A)** = Probability that door A contains the car (Free of assumptions); prior<br/>\newline
+**P(B)** = Probability that door B is opened (Combines the probability of P(B|A)*P(A), for both A contains the car, and does not contain the car.); normalizing constant<br/>\newline<br/>\newline
+To make it simple, let Door A be the chosen door, while Door B is not chosen and does not contain the car in any case. This means door B is always a candidate to be opened. Door C is not chosen, however, it is not known whether door C contains the car or not.<br/>\newline
+
+Thus, P(A|B) = the probability of door A containing the car given that door B was chosen<br/>\newline
+
+Since only 1 door can contain the car, the probability that our chosen door, door A, contains the car is 1/3. Therefore, the probability that door A contains the car is: 
+$$
+P(A) = \frac{1}{3} 
+$$
+<br/>\newline
+Now, let’s assume that door A contains the car, what is the probability that door B is opened given that A is correct. Given that door A is correct, doors B and C have an equal chance of being opened. Therefore:
+<br/><br/>
+$$P(B|A) = \frac{1}{2}$$
+
+\begin{center}Thus,\end{center}
+
+$$P(B|A)*P(A) = \frac{1}{3}*\frac{1}{2}=\frac{1}{6}$$
+<br/>\newline
+Well, what if door A did not contain the car? This means that door C contains the car. Thus, let’s use another posterior equation to calculate the probability that C is correct given that B is opened. In this situation, we still pick door A, however, it does not contain the car.<br/>\newline<br/>\newline
+
+\begin{center} P(C|B) = P(B|C)*P(C)P(B) \end{center}
+
+$$P(C|B) = \frac{P(B|C)*P(C)}{P(B)}$$
+
+$$P(C) = \frac{1}{3}$$ 
+<br/>\newline
+The probability of B being opened is now 1, given that both A and C cannot be opened since we chose door A, and door C contains the car. Therefore: P(B|C) = 1.
+<br/>\newline
+$$P(B|C)*P(C) = \frac{1}{3}*1 = \frac{1}{3}$$
+<br/>\newline
+Moving onto the denominator, P(B), the probability of door B being opened, we just take the sums of P(B|A)*P(A) and  P(B|C)P(A). 
+<br/>\newline<br/>\newline
+$$P(B) = \frac{1}{3} + \frac{1}{6} = \frac{3}{6} = \frac{1}{2}$$
+<br/>\newline
+Thus, the probability of door A contains the car given that B is opened, assuming that door A contains the car is as follows:
+<br/>\newline<br/>\newline
+$$P(A|B) = \frac{P(A|C)*P(A)}{P(B)} = \frac{\frac{1}{6}}{\frac{1}{2}} = \frac{2}{6} = \frac{1}{3}$$ 
+<br/>\newline
+On the other hand, the probability that A contains the car given that B is opened and assuming that door A does not contain the car is as follows: 
+<br/>\newline<br/>\newline
+$$P(C|B) = \frac{P(B|C)*P(C)}{P(B)} = \frac{\frac{1}{3}}{\frac{1}{3}} = \frac{2}{3}$$ 
+<br/>\newline
+Given that we choose door A, the chance that the car is behind door A is 13, which means that there is a 23 chance it isn’t behind door A. However, the Monty Hall problem allows us to switch between doors A and C.
+
+If we don’t switch, then the only instance that we get the car is if our chosen door contains the car. If we don’t switch when our chosen door does not contain the car, then the probability of getting the car is zero. Therefore, the chance of not switching and getting the car is: 
+<br/>\newline<br/>\newline
+$$[\frac{1} {3}*1] + [\frac{2}{3}*0] = \frac{1}{3}$$ 
+<br/>\newline
+If we switch, then we have a 23 chance to get the car as there is a higher chance of getting a door that does not contain the car. The only chance that we don’t get a car is when our chosen door already contains the car, and we switch doors.Therefore the chance of switching and getting a door that contains a car is:
+<br/>\newline<br/>\newline
+$$[\frac{2} {3}*1] + [\frac{1}{3}*0] = \frac{2}{3}$$
+<br/>\newline
+
+</p>
+
+<p align=center> <font size = "6">  <font color="ffb045">
+<center>
+**CONCLUSION**
+</font></font></p>
+<p align=center> <font size = "5">
+<center>
+**Therefore, as one can see, there is a higher chance of getting the car if one switches doors.**
+</font></font></p>
+![](C:\Users\Brix\Desktop\ENGG 21\MARKDOWN PICS\monty2.png)
+<hr/>
+
+![](C:\Users\Brix\Desktop\ENGG 21\MARKDOWN PICS\lotto.png)
+</br>
+
+<p align=center> <font size = "6">  <font color="ffb045">
+<center>
+**PROBLEM DESCRIPTION**
+</font></font></p>
+The Philippine Charity Sweepstakes Office (PCSO) Ultra Lotto 6/58 is among the most popular lottos. Players choose 6 out of the 58 numbers and each ticket costs ₱20. The PCSO randomly selects 6 out of the 58 numbers and the prize money depends on how many numbers match your ticket, with all numbers matching being the grand prize. How much would it cost to buy every ticket combination and will the grand prize of  ₱50 million shoulder the costs?
+
+<p align=center> <font size = "6">  <font color="ffb045">
+<center>
+**SOLUTION**
+</font></font></p>
+The PSCO CHOOSES 6 numbers out of 58 without repetition. Note the word "chooses" since the arrangement does not matter. We now let N be the number of possible combinations of the 6 numbers such that 
+
+\begin{align}
+N =  {58 \choose 6} = 40475358
+\end{align}
+Therefore there N number of different combinations for the 6 numbered balls. 
+If someone were to buy all combination as at 20 pesos each, it would cost them 
+\begin{align}
+40475358 \times 20 = Php 809507160
+\end{align}
+**Php 809 507 160** far **exceeds** the minimum prize of **Php 50 Million**.
+
+<p align=center> <font size = "6">  <font color="ffb045">
+<center>
+**CONCLUSION**
+</font></font></p>
+<p align=center> <font size = "5">
+<center>
+**Therefore, it is not advisable to buy all possible tickets, since it will just incur massive loss on the bettor.**
+</font></font></p>
+
+![](C:\Users\Brix\Desktop\ENGG 21\MARKDOWN PICS\lotto2.png)
+<center>
+*6/58 LOTTO Result as of June 28, 2022*
+</center>
+<hr/>
+
+
+<p>
+**References:**
+</p>
+<ref>
+•GreekDataGuy, G. D. G. (2021, December 14). Solving the Monty Hall Problem with Bayes Theorem - Towards Data Science. Medium. Retrieved June 28, 2022, from https://towardsdatascience.com/solving-the-monty-hall-problem-with-bayes-theorem-893289953e16
+
+<ref>
+•Icon Finder. (2022). Car icon - Free download on Iconfinder. Iconfinder. Retrieved 28 June 2022, from https://www.iconfinder.com/icons/2639905/car_icon.
+
+<ref>
+•Macabudbud, R. (2022). 6/58 Lotto Result Summary and History (PCSO Lotto Results). Retrieved 28 June 2022, from https://facts.com.ph/6-58-lotto-result-summary-and-history/
+
+<ref>
+•Mrson graphic. (2022). Download Goat head Logo Template vector for free. Vecteezy. Retrieved 28 June 2022, from https://www.vecteezy.com/vector-art/595558-goat-head-logo-template-vector.
+
+<ref>
+•Philippine News. (2022). 6/58 LOTTO RESULT - Official PCSO 6/58 Ultra Lotto Results. Philippine News. Retrieved 29 June 2022, from https://philnews.ph/pcso-lotto-result/6-58-lotto-result/.
+
+<ref>
+•Stephanie Glen. "Monty Hall Problem: Solution Explained Simply" From StatisticsHowTo.com: Elementary Statistics for the rest of us! https://www.statisticshowto.com/probability-and-statistics/monty-hall-problem/
+
+<ref>
+•Why betting on all possible UltraLotto 6/58 combinations is not a good idea. Just yet. (2018). Retrieved 28 June 2022, from https://nolisoli.ph/50452/all-possible-lotto-658-combinations-csanjose-20181009/
+</ref>
+
+![](C:\Users\Brix\Desktop\ENGG 21\MARKDOWN PICS\Authors.png)
